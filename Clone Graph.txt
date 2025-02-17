@@ -1,0 +1,24 @@
+class Solution(object):
+    def cloneGraph(self, node):
+        """
+        :type node: Node
+        :rtype: Node
+        """
+        if not node:
+            return None
+        
+        clones = {}  # Dictionary to store cloned nodes
+        
+        def dfs(curr):
+            if curr in clones:  # If already cloned, return the clone
+                return clones[curr]
+            
+            clone = Node(curr.val)  # Create a new clone
+            clones[curr] = clone  # Store the clone in the hashmap
+            
+            for neighbor in curr.neighbors:  # Recursively clone neighbors
+                clone.neighbors.append(dfs(neighbor))
+            
+            return clone
+        
+        return dfs(node)

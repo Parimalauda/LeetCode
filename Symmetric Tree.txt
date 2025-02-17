@@ -1,0 +1,21 @@
+class Solution(object):
+    def isSymmetric(self, root):
+        """
+        :type root: Optional[TreeNode]
+        :rtype: bool
+        """
+        if not root:
+            return True
+        
+        # Helper function to check symmetry
+        def isMirror(t1, t2):
+            # If both nodes are None, they are symmetric
+            if not t1 and not t2:
+                return True
+            # If one node is None and the other is not, they are not symmetric
+            if not t1 or not t2:
+                return False
+            # Check if the values are the same and recursively check subtrees
+            return (t1.val == t2.val) and isMirror(t1.left, t2.right) and isMirror(t1.right, t2.left)
+        
+        return isMirror(root.left, root.right)

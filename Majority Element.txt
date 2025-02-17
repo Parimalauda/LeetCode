@@ -1,0 +1,13 @@
+class Solution(object):
+    def majorityElement(self, nums):
+        count, candidate = 0, None
+        for num in nums:
+            if count == 0:
+                candidate = num
+            count += (1 if num == candidate else -1)
+        return candidate
+
+
+solution = Solution()
+print(solution.majorityElement([3, 2, 3]))         
+print(solution.majorityElement([2, 2, 1, 1, 1, 2, 2]))  

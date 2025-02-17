@@ -1,0 +1,16 @@
+class Solution(object):
+    def reverseList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        prev = None
+        curr = head
+        
+        while curr:
+            next_node = curr.next  # Store next node
+            curr.next = prev  # Reverse the link
+            prev = curr  # Move prev to current node
+            curr = next_node  
+        
+        return prev 

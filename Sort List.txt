@@ -1,0 +1,39 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution(object):
+    def sortList(self, head):
+        if not head or not head.next:
+            return head
+
+        def getMid(head):
+            slow, fast = head, head.next
+            while fast and fast.next:
+                slow, fast = slow.next, fast.next.next
+            return slow
+
+        def merge(left, right):
+            dummy = ListNode()
+            tail = dummy
+            while left and right:
+                if left.val < right.val:
+                    tail.next, left = left, left.next
+                else:
+                    tail.next, right = right, right.next
+                tail = tail.next
+            tail.next = left or right
+            return dummy.next
+
+        mid = getMid(head)
+        left = head
+        right = mid.next
+        mid.next = None
+
+        left = self.sortList(left)
+        right = self.sortList(right)
+
+        return merge(left, right)
+
